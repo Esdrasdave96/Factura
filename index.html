@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%235a48e0'/%3E%3Cpath d='M12 9h12l6 6v16a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z' fill='white'/%3E%3C/svg%3E">
 <title>Factura – vos factures en 30 secondes</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef1f5;--panel:#fff;--ink:#14213d;--mute:#5d6b82;--line:#d8dee8;--acc:#1f4fd8;--accfg:#fff;--ok:#0f8a5f;--warn:#a86a08;--bad:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--panel:#171f2f;--ink:#e8edf6;--mute:#93a0b8;--line:#2a3550;--acc:#6b93ff;--accfg:#0e1420;--ok:#3ec790;--warn:#e0a94a;--bad:#ef7a6d}}
-:root[data-theme="dark"]{--bg:#0e1420;--panel:#171f2f;--ink:#e8edf6;--mute:#93a0b8;--line:#2a3550;--acc:#6b93ff;--accfg:#0e1420;--ok:#3ec790;--warn:#e0a94a;--bad:#ef7a6d}
+:root{--bg:#f4f2fc;--panel:#fff;--ink:#1f1d4d;--mute:#6a6890;--line:#e0dcf3;--acc:#5a48e0;--g1:#ece6ff;--g2:#dff5ea;--g3:#fff0c2;--accfg:#fff;--ok:#0f8a5f;--warn:#a86a08;--bad:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14132b;--panel:#1e1c3d;--ink:#ece9ff;--mute:#a09dc6;--line:#33305c;--acc:#a396ff;--accfg:#14132b;--g1:#221f52;--g2:#16332f;--g3:#3a2f12;--ok:#3ec790;--warn:#e0a94a;--bad:#ef7a6d}}
+:root[data-theme="dark"]{--bg:#14132b;--panel:#1e1c3d;--ink:#ece9ff;--mute:#a09dc6;--line:#33305c;--acc:#a396ff;--accfg:#14132b;--g1:#221f52;--g2:#16332f;--g3:#3a2f12;--ok:#3ec790;--warn:#e0a94a;--bad:#ef7a6d}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -62,25 +63,59 @@ button.p{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-w
 .pill{border-radius:99px;padding:4px 12px;font-size:.85rem;border:1px solid currentColor;background:transparent}
 .pill.pending{color:var(--warn)}.pill.late{color:var(--bad)}.pill.paid{color:var(--ok)}
 .empty{color:var(--mute);margin:0}
-[hidden]{display:none!important}.auth{max-width:380px;margin:24px auto}.hd-r{display:flex;gap:12px;align-items:center}
+[hidden]{display:none!important}.auth{position:relative;min-height:100vh;overflow:hidden;display:grid;place-items:center;padding:28px 16px;background:linear-gradient(155deg,var(--g1),var(--g2) 55%,var(--g3))}
+.blob{position:absolute;border-radius:50%;filter:blur(44px);opacity:.6}
+.b1{width:240px;height:240px;background:#b9adff;top:-70px;left:-60px}.b2{width:220px;height:220px;background:#9fe3c7;right:-70px;top:34%}.b3{width:200px;height:200px;background:#ffd98a;bottom:-60px;left:12%}
+.aw{position:relative;width:100%;max-width:400px}
+.brand{display:flex;align-items:center;gap:10px}.brand h1{font-size:1.4rem}.logo{width:38px;height:38px;flex:none}
+.auth h2{font-size:1.9rem;line-height:1.1;letter-spacing:-.03em;margin:18px 0 6px}
+.lead{margin:0 0 16px;color:var(--mute)}
+.mini{position:relative;z-index:1;width:170px;margin:0 0 -34px auto;padding:12px;border-radius:16px;background:#fff;color:#1f1d4d;box-shadow:0 14px 30px rgba(60,40,160,.2);transform:rotate(5deg);animation:pop .7s cubic-bezier(.2,.9,.3,1.2) both}
+.mini i{display:block;height:6px;border-radius:3px;background:#e3defa;margin:6px 0}.mini i:nth-child(2){width:70%}
+.mini b{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:99px;background:#d8f5e8;color:#0f8a5f;font-size:.75rem}
+@keyframes pop{from{opacity:0;transform:translateY(16px) rotate(-4deg)}}
+@media(prefers-reduced-motion:reduce){.mini{animation:none}}
+.acard{padding:46px 20px 20px;border-radius:24px;background:color-mix(in srgb,var(--panel) 90%,transparent);backdrop-filter:blur(10px);box-shadow:0 20px 50px rgba(60,40,160,.16)}
+.acard input{border-radius:14px;padding:12px 14px}.acard button{border-radius:99px;padding:11px 20px}
+a{color:var(--acc)}
+.cal h3{margin:12px 0 6px;font-size:1rem}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;text-transform:capitalize}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cg b{font-weight:500;color:var(--mute);font-size:.8rem}
+.day{padding:6px 0 4px;min-height:46px;border-radius:12px;border:1px solid transparent;background:transparent}
+.day span{display:flex;gap:3px;justify-content:center;height:8px;margin-top:2px}
+.day.today{border-color:var(--acc)}.day.sel{background:var(--acc);color:var(--accfg)}
+.d{display:inline-block;width:7px;height:7px;border-radius:50%}
+.d.pending{background:var(--warn)}.d.late{background:var(--bad)}.d.paid{background:var(--ok)}.d.note{background:var(--acc)}.day.sel .d.note{background:var(--accfg)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.82rem;color:var(--mute);margin:10px 0}.legend .d{margin-right:4px}
+.noteadd{display:grid;gap:8px;margin:14px 0}.dl{margin:4px 0}
+.nt{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.nt p{margin:0;white-space:pre-line}.nt small{color:var(--mute)}.hd-r{display:flex;gap:12px;align-items:center}
 @media print{header,.form,.hist{display:none!important}body,.wrap{background:#fff;padding:0;display:block}.sheet{box-shadow:none;padding:0}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<header>
-  <div><h1>Factura</h1><p>Créez une facture, suivez qui a payé.</p></div>
+<header id="top" hidden>
+  <div class="brand"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#5a48e0"/><path d="M12 9h12l6 6v16a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z" fill="#fff"/><path d="M24 9v6h6" fill="#cfc8ff"/><path d="M15 25l3.5 3.5L26 21" stroke="#2fbf8f" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Factura</h1></div>
   <div class="hd-r"><span class="quota" id="quota"></span><button type="button" id="out" hidden>Se déconnecter</button></div>
 </header>
 
-<section class="panel auth" id="auth">
-  <h2>Connexion</h2>
-  <div class="g">
-    <label class="full">E-mail<input id="aEmail" type="email" autocomplete="email"></label>
-    <label class="full">Mot de passe (6 caractères minimum)<input id="aPass" type="password" autocomplete="current-password"></label>
+<section class="auth" id="auth">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+  <div class="aw">
+    <div class="brand"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#5a48e0"/><path d="M12 9h12l6 6v16a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z" fill="#fff"/><path d="M24 9v6h6" fill="#cfc8ff"/><path d="M15 25l3.5 3.5L26 21" stroke="#2fbf8f" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Factura</h1></div>
+    <h2>Vos factures, sans prise de tête.</h2>
+    <p class="lead">Créez-les en 30 secondes et suivez qui a payé.</p>
+    <div class="mini" aria-hidden="true"><i></i><i></i><i></i><b>Payée</b></div>
+    <div class="acard">
+      <div class="g">
+        <label class="full">Adresse e-mail<input id="aEmail" type="email" autocomplete="email" placeholder="vous@exemple.fr"></label>
+        <label class="full">Mot de passe<input id="aPass" type="password" autocomplete="current-password" placeholder="6 caractères minimum"></label>
+      </div>
+      <div class="acts"><button type="button" class="p" id="login">Se connecter</button><button type="button" id="signup">Créer un compte</button></div>
+      <p class="msg" id="aMsg" hidden></p>
+    </div>
   </div>
-  <div class="acts"><button type="button" class="p" id="login">Se connecter</button><button type="button" id="signup">Créer un compte</button></div>
-  <p class="msg" id="aMsg" hidden></p>
 </section>
 
 <main class="wrap" id="app" hidden>
@@ -96,6 +131,7 @@ button.p{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-w
       <div class="g">
         <label class="full">Nom<input id="clName" data-f></label>
         <label class="full">Adresse<textarea id="clAddr" data-f rows="2"></textarea></label>
+        <label class="full">Téléphone<input id="clPhone" data-f type="tel" inputmode="tel" placeholder="+33 6 12 34 56 78"></label>
       </div>
     </fieldset>
     <fieldset><legend>Facture</legend>
@@ -127,6 +163,16 @@ button.p{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-w
     <h2>Suivi des paiements</h2>
     <div class="sum" id="sum"></div>
     <div id="hist"></div>
+  </section>
+<section class="panel hist cal">
+    <h2>Agenda et notes</h2>
+    <div class="calhead"><button type="button" id="prev" aria-label="Mois précédent">‹</button><strong id="mlabel"></strong><button type="button" id="next" aria-label="Mois suivant">›</button></div>
+    <div class="cg" id="cg"></div>
+    <p class="legend"><span><i class="d pending"></i>À encaisser</span><span><i class="d late"></i>En retard</span><span><i class="d paid"></i>Payée</span><span><i class="d note"></i>Note</span></p>
+    <div id="dayInfo"></div>
+    <div class="noteadd"><textarea id="nBody" rows="2" placeholder="Écrire une note…"></textarea><button type="button" class="p" id="nAdd">Ajouter la note</button></div>
+    <p class="msg bad" id="nMsg" hidden></p>
+    <div id="notes"></div>
   </section>
 </main>
 
@@ -165,7 +211,7 @@ function renderSheet(){
   <div class="top"><div><h3>Facture</h3></div><div><b>${v('num')}</b><br>Émise le ${fd($('#date').value)}<br>À régler avant le ${fd($('#due').value)}</div></div>
   <div class="parties">
     <div><b>De</b><strong>${v('meName')||'Votre nom'}</strong><div class="pre">${v('meAddr')}</div>${$('#meSiret').value?'SIRET '+v('meSiret'):''}</div>
-    <div><b>Pour</b><strong>${v('clName')||'Nom du client'}</strong><div class="pre">${v('clAddr')}</div></div>
+    <div><b>Pour</b><strong>${v('clName')||'Nom du client'}</strong><div class="pre">${v('clAddr')}</div>${$('#clPhone').value?'Tél. '+v('clPhone'):''}</div>
   </div>
   <div class="tw"><table><thead><tr><th>Description</th><th class="n">Qté</th><th class="n">Prix</th><th class="n">Total</th></tr></thead><tbody>
   ${lines.map(l=>`<tr><td>${esc(l.d)}</td><td class="n">${+l.q||0}</td><td class="n">${eur(+l.p)}</td><td class="n">${eur((+l.q||0)*(+l.p||0))}</td></tr>`).join('')}
@@ -177,13 +223,13 @@ function renderSheet(){
 }
 const status=h=>h.paid?'paid':(h.due<today?'late':'pending');
 const label={paid:'Payée',late:'En retard',pending:'En attente'};
-function renderHist(){
+function renderHist(){renderCal();
   const used=hist.filter(h=>h.month===month).length;
   $('#quota').textContent=`Gratuit : ${used}/${FREE} factures ce mois-ci`;
   const sum=s=>hist.filter(h=>status(h)===s).reduce((a,h)=>a+h.total,0);
   $('#sum').innerHTML=`<div><span>En attente</span><br><strong>${eur(sum('pending'))}</strong></div><div><span>En retard</span><br><strong style="color:var(--bad)">${eur(sum('late'))}</strong></div><div><span>Encaissé</span><br><strong style="color:var(--ok)">${eur(sum('paid'))}</strong></div>`;
   $('#hist').innerHTML=hist.length?hist.slice().reverse().map(h=>`<div class="hr">
-    <div><strong>${esc(h.client||'Sans nom')}</strong><small>${esc(h.num)} · échéance ${fd(h.due)}</small></div>
+    <div><strong>${esc(h.client||'Sans nom')}</strong><small>${esc(h.num)} · échéance ${fd(h.due)}</small>${contact(h.phone)}</div>
     <strong>${eur(h.total)}</strong>
     <button type="button" class="pill ${status(h)}" data-toggle="${h.id}" title="Marquer comme payée ou non">${label[status(h)]}</button></div>`).join(''):'<p class="empty">Aucune facture pour l’instant. Enregistrez la première pour suivre son paiement.</p>';
 }
@@ -208,14 +254,51 @@ $('#save').onclick=async()=>{
   if(hist.filter(h=>h.month===month).length>=FREE){say('Vous avez utilisé vos 3 factures gratuites de ce mois. Le plan Pro (factures illimitées et relances automatiques) arrive bientôt.',true);return}
   if(!$('#clName').value.trim()){say('Ajoutez le nom du client avant d’enregistrer.',true);return}
   const row={num:$('#num').value,client:$('#clName').value.trim(),total:calc().total,due:$('#due').value,paid:false,month,
-    data:{lines,clAddr:$('#clAddr').value,tva:$('#tva').value,date:$('#date').value}};
+    data:{lines,clPhone:$('#clPhone').value.trim(),clAddr:$('#clAddr').value,tva:$('#tva').value,date:$('#date').value}};
   const {data,error}=await sb.from('invoices').insert(row).select().single();
   if(error){say(/FREE_LIMIT/.test(error.message)?'Vous avez utilisé vos 3 factures gratuites de ce mois. Le plan Pro (factures illimitées et relances automatiques) arrive bientôt.':'Enregistrement impossible : '+error.message,true);return}
-  hist.push({id:data.id,num:data.num,client:data.client,total:Number(data.total),due:data.due,paid:false,month:data.month});
+  hist.push({id:data.id,num:data.num,client:data.client,total:Number(data.total),due:data.due,paid:false,month:data.month,phone:(data.data||{}).clPhone||''});
   say('Facture enregistrée. Suivez son paiement plus bas.');
-  $('#num').value=nextNum();$('#clName').value='';$('#clAddr').value='';
+  $('#num').value=nextNum();$('#clName').value='';$('#clAddr').value='';$('#clPhone').value='';
   renderHist();renderSheet();
 };
+
+/* Agenda et notes */
+let notes=[], view=new Date(now.getFullYear(),now.getMonth(),1), sel=null;
+function contact(p){const d=(p||'').replace(/[^\d+]/g,'');return d?`<small><a href="tel:${esc(d)}">${esc(p)}</a> · <a href="https://wa.me/${esc(d.replace(/\D/g,''))}" target="_blank" rel="noopener">WhatsApp</a></small>`:''}
+function renderCal(){
+  const y=view.getFullYear(), m=view.getMonth();
+  $('#mlabel').textContent=view.toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+  const first=(new Date(y,m,1).getDay()+6)%7, days=new Date(y,m+1,0).getDate();
+  let h=['L','M','M','J','V','S','D'].map(d=>`<b>${d}</b>`).join('')+'<i></i>'.repeat(first);
+  for(let d=1;d<=days;d++){
+    const k=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dots=hist.filter(x=>x.due===k).map(x=>`<i class="d ${status(x)}"></i>`).join('')+(notes.some(n=>n.day===k)?'<i class="d note"></i>':'');
+    h+=`<button type="button" class="day${k===today?' today':''}${k===sel?' sel':''}" data-day="${k}" aria-label="${fd(k)}">${d}<span>${dots}</span></button>`;
+  }
+  $('#cg').innerHTML=h;renderNotes();
+}
+function renderNotes(){
+  const due=sel?hist.filter(x=>x.due===sel):[];
+  $('#dayInfo').innerHTML=sel?`<h3>${fd(sel)}</h3>`+(due.length?due.map(x=>`<p class="dl">Échéance : <strong>${esc(x.client)}</strong> · ${eur(x.total)} · ${label[status(x)]}</p>`).join(''):'<p class="empty">Aucune échéance ce jour-là.</p>'):'<p class="empty">Touchez un jour pour voir ses échéances et lui ajouter une note.</p>';
+  const list=notes.filter(n=>!sel||n.day===sel);
+  $('#notes').innerHTML=list.length?list.map(n=>`<div class="nt"><div>${n.day?`<small>${fd(n.day)}</small>`:''}<p>${esc(n.body)}</p></div><button type="button" class="x" data-ndel="${n.id}" aria-label="Supprimer la note">✕</button></div>`).join(''):'<p class="empty">Aucune note.</p>';
+}
+const nsay=t=>{const m=$('#nMsg');m.textContent=t;m.hidden=false};
+$('#prev').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);renderCal()};
+$('#next').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);renderCal()};
+$('#nAdd').onclick=async()=>{
+  const body=$('#nBody').value.trim();if(!body)return;
+  const {data,error}=await sb.from('notes').insert({body,day:sel}).select().single();
+  if(error){nsay('Note non enregistrée : '+error.message);return}
+  $('#nMsg').hidden=true;notes.unshift({id:data.id,day:data.day,body:data.body});$('#nBody').value='';renderCal();
+};
+document.addEventListener('click',async e=>{
+  const dd=e.target.closest('[data-day]');
+  if(dd){sel=sel===dd.dataset.day?null:dd.dataset.day;renderCal();return}
+  const id=e.target.dataset.ndel;
+  if(id){const {error}=await sb.from('notes').delete().eq('id',id);if(error)nsay('Suppression impossible : '+error.message);else{notes=notes.filter(n=>n.id!==id);renderCal()}}
+});
 
 /* Comptes et sauvegarde */
 let uid=null, meT;
@@ -223,16 +306,19 @@ const aMsg=(t,ok)=>{const m=$('#aMsg');m.textContent=t;m.hidden=false;m.classNam
 const cred=()=>({email:$('#aEmail').value.trim(),password:$('#aPass').value});
 const saveMe=()=>{clearTimeout(meT);meT=setTimeout(()=>{const me={};['meName','meSiret','meAddr'].forEach(id=>me[id]=$('#'+id).value);sb.auth.updateUser({data:{me}})},800)};
 async function start(user){
-  $('#auth').hidden=true;$('#app').hidden=false;$('#out').hidden=false;
+  $('#auth').hidden=true;$('#app').hidden=false;$('#out').hidden=false;$('#top').hidden=false;
   const me=user.user_metadata?.me||{};
   ['meName','meSiret','meAddr'].forEach(id=>{$('#'+id).value=me[id]||''});
   const {data,error}=await sb.from('invoices').select('*').order('created_at');
   if(error)say('Chargement des factures impossible : '+error.message,true);
-  hist=(data||[]).map(r=>({id:r.id,num:r.num,client:r.client,total:Number(r.total),due:r.due,paid:r.paid,month:r.month}));
+  hist=(data||[]).map(r=>({id:r.id,num:r.num,client:r.client,total:Number(r.total),due:r.due,paid:r.paid,month:r.month,phone:(r.data||{}).clPhone||''}));
+  const nr=await sb.from('notes').select('*').order('created_at',{ascending:false});
+  if(nr.error)nsay('Notes indisponibles : '+nr.error.message);
+  notes=(nr.data||[]).map(n=>({id:n.id,day:n.day,body:n.body}));
   $('#num').value=nextNum();
   renderLines();renderSheet();renderHist();
 }
-function stop(){$('#auth').hidden=false;$('#app').hidden=true;$('#out').hidden=true;hist=[]}
+function stop(){$('#auth').hidden=false;$('#app').hidden=true;$('#out').hidden=true;$('#top').hidden=true;hist=[];notes=[];sel=null}
 if(!sb){aMsg('Configuration manquante : renseignez SUPABASE_URL et SUPABASE_KEY en haut du script.')}
 else{
   $('#login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword(cred());if(error)aMsg('Connexion impossible : '+error.message)};
