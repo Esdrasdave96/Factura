@@ -210,8 +210,8 @@ $('#save').onclick=async()=>{
   const row={num:$('#num').value,client:$('#clName').value.trim(),total:calc().total,due:$('#due').value,paid:false,month,
     data:{lines,clAddr:$('#clAddr').value,tva:$('#tva').value,date:$('#date').value}};
   const {data,error}=await sb.from('invoices').insert(row).select().single();
-  if(error){say('Enregistrement impossible : '+error.message,true);return}
-  hist.push({id:data.id,num:data.num,client:data.client,total:Number(data.total),due:data.due,paid:false,month});
+  if(error){say(/FREE_LIMIT/.test(error.message)?'Vous avez utilisé vos 3 factures gratuites de ce mois. Le plan Pro (factures illimitées et relances automatiques) arrive bientôt.':'Enregistrement impossible : '+error.message,true);return}
+  hist.push({id:data.id,num:data.num,client:data.client,total:Number(data.total),due:data.due,paid:false,month:data.month});
   say('Facture enregistrée. Suivez son paiement plus bas.');
   $('#num').value=nextNum();$('#clName').value='';$('#clAddr').value='';
   renderHist();renderSheet();
@@ -236,7 +236,7 @@ function stop(){$('#auth').hidden=false;$('#app').hidden=true;$('#out').hidden=t
 if(!sb){aMsg('Configuration manquante : renseignez SUPABASE_URL et SUPABASE_KEY en haut du script.')}
 else{
   $('#login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword(cred());if(error)aMsg('Connexion impossible : '+error.message)};
-  $('#signup').onclick=async()=>{const {data,error}=await sb.auth.signUp(cred());
+  $('#signup').onclick=async()=>{const {data,error}=await sb.auth.signUp({...cred(),options:{emailRedirectTo:'https://esdrasdave96.github.io/Factura/'}});
     if(error)aMsg('Création impossible : '+error.message);
     else if(!data.session)aMsg('Compte créé. Confirmez votre adresse via l’e-mail reçu, puis connectez-vous.',true)};
   $('#out').onclick=()=>sb.auth.signOut();
